@@ -1,0 +1,26 @@
+version: "2"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    volumes:
+      - "${PWD}/grafana-volume:/var/lib/grafana"
+    environment:
+      - GF_SERVER_ROOT_URL=https://grafana.ottencoffee.co.id
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - monitoring
+    volumes:
+      - "${PWD}/influxdb-volume:/var/lib/influxdb"
+networks:
+  monitoring:
